@@ -2,11 +2,13 @@ package pl.allegrotech.weatherapp.api;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.allegrotech.weatherapp.WeatherAppApplication;
+import pl.allegrotech.weatherapp.WeatherApplication;
 
-@SpringBootTest(classes = WeatherAppApplication.class,
+@SpringBootTest(
+        classes = WeatherApplication.class,
         properties = "application.environment=integration",
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+)
 class BaseIntegrationTest {
 
     @Value("${local.server.port}")

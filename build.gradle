@@ -8,7 +8,7 @@ apply plugin: 'io.spring.dependency-management'
 
 group = 'pl.allegrotech'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '15'
 
 repositories {
 	mavenCentral()
@@ -20,8 +20,8 @@ dependencies {
 }
 
 configurations {
-	integrationTestCompile.extendsFrom testImplementation
-	integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
+	integrationCompile.extendsFrom testImplementation
+	integrationRuntimeOnly.extendsFrom testRuntimeOnly
 }
 
 tasks.withType(Test) {
@@ -29,7 +29,7 @@ tasks.withType(Test) {
 }
 
 sourceSets {
-	integrationTest {
+	integration {
 		java {
 			compileClasspath += main.output + test.output
 			runtimeClasspath += main.output + test.output
@@ -39,11 +39,11 @@ sourceSets {
 	}
 }
 
-task integrationTest(type: Test) {
+task integration(type: Test) {
 	description = 'Run the integration tests.'
 	group = 'verification'
-	testClassesDirs = sourceSets.integrationTest.output.classesDirs
-	classpath = sourceSets.integrationTest.runtimeClasspath
+	testClassesDirs = sourceSets.integration.output.classesDirs
+	classpath = sourceSets.integration.runtimeClasspath
 }
 
-check.dependsOn(integrationTest, test)
+check.dependsOn(integration, test)

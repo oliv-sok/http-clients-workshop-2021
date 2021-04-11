@@ -1,7 +1,5 @@
 package pl.allegrotech.weatherapp.domain;
 
-import pl.allegrotech.weatherapp.api.WeatherNotFoundException;
-
 public class WeatherService {
 
     private final WeatherRepository weatherRepository;
@@ -10,7 +8,7 @@ public class WeatherService {
         this.weatherRepository = weatherRepository;
     }
 
-    public Weather getWeatherByLocation(Weather.Location location) {
+    public Weather getWeatherByLocation(Location location) {
         return weatherRepository.getWeatherByLocation(location)
                 .orElseThrow(() -> new WeatherNotFoundException(location));
     }

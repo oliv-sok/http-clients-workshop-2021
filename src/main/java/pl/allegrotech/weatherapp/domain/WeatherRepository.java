@@ -6,7 +6,7 @@ public interface WeatherRepository {
 
     void save(Weather weather);
 
-    Optional<Weather> getWeatherByLocation(Weather.Location location);
+    Optional<Weather> getWeatherByLocation(Location location);
 
     void deleteAll();
 
