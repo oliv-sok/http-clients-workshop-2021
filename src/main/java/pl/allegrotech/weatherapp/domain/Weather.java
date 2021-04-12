@@ -6,10 +6,12 @@ public final class Weather {
 
     private final Location location;
     private final Double temperature;
+    private final String city;
 
-    public Weather(Location location, Double temperature) {
+    public Weather(Location location, Double temperature, String city) {
         this.location = location;
         this.temperature = temperature;
+        this.city = city;
     }
 
     public Location getLocation() {
@@ -20,13 +22,17 @@ public final class Weather {
         return temperature;
     }
 
+    public String getCity() {
+        return city;
+    }
+
     public WeatherDto toDto() {
         var location = this.getLocation();
         return new WeatherDto(
                 location.getLatitude(),
                 location.getLongitude(),
-                this.getTemperature()
-        );
+                this.getTemperature(),
+                city);
     }
 
     @Override

@@ -15,4 +15,7 @@ public class WeatherService {
                 .orElseThrow(() -> new WeatherNotFoundException(location));
     }
 
+    public WeatherDto getWeatherByCity(String city) {
+        return null;
+    }
 }

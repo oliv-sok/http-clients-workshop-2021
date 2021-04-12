@@ -8,6 +8,8 @@ public interface WeatherRepository {
 
     Optional<Weather> getWeatherByLocation(Weather.Location location);
 
+    Optional<Weather> getWeatherByCity(String city);
+
     void deleteAll();
 
 }
