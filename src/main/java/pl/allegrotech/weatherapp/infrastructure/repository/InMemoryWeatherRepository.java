@@ -11,8 +11,9 @@ public class InMemoryWeatherRepository implements WeatherRepository {
     private final Map<Location, Weather> storage = new HashMap<>();
 
     @Override
-    public void save(Weather weather) {
+    public Weather save(Weather weather) {
         storage.put(weather.getLocation(), weather);
+        return weather;
     }
 
     @Override

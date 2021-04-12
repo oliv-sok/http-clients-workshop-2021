@@ -19,8 +19,8 @@ public class WeatherService {
                 .orElseThrow(() -> new WeatherNotFoundException(location));
     }
 
-    public void saveWeather(WeatherApiRequest request) {
-        weatherRepository.save(apiRequestToWeather(request));
+    public Weather saveWeather(WeatherApiRequest request) {
+        return weatherRepository.save(apiRequestToWeather(request));
     }
 
     public List<Weather> getAllWeather() {
