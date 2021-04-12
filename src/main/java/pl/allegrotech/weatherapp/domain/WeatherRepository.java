@@ -1,5 +1,6 @@
 package pl.allegrotech.weatherapp.domain;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface WeatherRepository {
@@ -8,8 +9,7 @@ public interface WeatherRepository {
 
     Optional<Weather> getWeatherByLocation(Location location);
 
-    Optional<Weather> getWeatherByCity(String city);
-
     void deleteAll();
 
+    public Optional<List<Weather>> getAll();
 }

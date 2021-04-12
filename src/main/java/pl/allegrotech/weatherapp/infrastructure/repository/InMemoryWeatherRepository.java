@@ -4,9 +4,7 @@ import pl.allegrotech.weatherapp.domain.Location;
 import pl.allegrotech.weatherapp.domain.Weather;
 import pl.allegrotech.weatherapp.domain.WeatherRepository;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class InMemoryWeatherRepository implements WeatherRepository {
 
@@ -25,6 +23,11 @@ public class InMemoryWeatherRepository implements WeatherRepository {
     @Override
     public void deleteAll() {
         storage.clear();
+    }
+
+    @Override
+    public Optional<List<Weather>> getAll() {
+        return Optional.of(new ArrayList<>(storage.values()));
     }
 
 }
