@@ -1,5 +1,6 @@
-package pl.allegrotech.weatherapp.infrastructure;
+package pl.allegrotech.weatherapp.infrastructure.repository;
 
+import pl.allegrotech.weatherapp.domain.Location;
 import pl.allegrotech.weatherapp.domain.Weather;
 import pl.allegrotech.weatherapp.domain.WeatherRepository;
 
@@ -9,7 +10,7 @@ import java.util.Optional;
 
 public class InMemoryWeatherRepository implements WeatherRepository {
 
-    private final Map<Weather.Location, Weather> storage = new HashMap<>();
+    private final Map<Location, Weather> storage = new HashMap<>();
 
     @Override
     public void save(Weather weather) {
@@ -17,7 +18,7 @@ public class InMemoryWeatherRepository implements WeatherRepository {
     }
 
     @Override
-    public Optional<Weather> getWeatherByLocation(Weather.Location location) {
+    public Optional<Weather> getWeatherByLocation(Location location) {
         return Optional.ofNullable(storage.get(location));
     }
 

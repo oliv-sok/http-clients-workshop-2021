@@ -1,7 +1,7 @@
 package pl.allegrotech.weatherapp.domain;
 
 import org.junit.jupiter.api.Test;
-import pl.allegrotech.weatherapp.infrastructure.InMemoryWeatherRepository;
+import pl.allegrotech.weatherapp.infrastructure.repository.InMemoryWeatherRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static pl.allegrotech.weatherapp.domain.SampleWeather.weatherForWarsaw;
@@ -14,11 +14,11 @@ class WeatherServiceTest {
     @Test
     public void shouldReturnWeatherWhenItExists() {
         // given
-        var sampleWeather = weatherForWarsaw();
+        Weather sampleWeather = weatherForWarsaw();
         weatherRepository.save(sampleWeather);
 
         // when
-        var foundWeather = weatherService.getWeatherByLocation(sampleWeather.getLocation());
+        Weather foundWeather = weatherService.getWeatherByLocation(sampleWeather.getLocation());
 
         // then
         assertEquals(sampleWeather, foundWeather);

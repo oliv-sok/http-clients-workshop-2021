@@ -5,11 +5,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pl.allegrotech.weatherapp.domain.Weather;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import pl.allegrotech.weatherapp.domain.Location;
 import pl.allegrotech.weatherapp.domain.WeatherService;
-import pl.allegrotech.weatherapp.domain.WeatherDto;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(path = "/weather", produces = MediaType.APPLICATION_JSON_VALUE)
 class WeatherController {
 
     private static final Logger logger = LoggerFactory.getLogger(WeatherController.class);
@@ -20,16 +25,19 @@ class WeatherController {
         this.weatherService = weatherService;
     }
 
-    @GetMapping
-    WeatherDto getWeather(@RequestParam Double latitude, @RequestParam Double longitude) {
+    @GetMapping(path = "/weather", produces = APPLICATION_JSON_VALUE)
+    ResponseEntity<WeatherApiResponse> getWeather(
+            @RequestParam(name = "latitude") double latitude,
+            @RequestParam(name = "longitude") double longitude
+    ) {
         logger.info("Getting weather for latitude = {} and longitude = {}", latitude, longitude);
-        return weatherService.getWeatherByLocation(new Weather.Location(latitude, longitude)).toDto();
+        return ResponseEntity.ok(
+                weatherService.getWeatherByLocation(new Location(latitude, longitude)).toApiResponse()
+        );
     }
 
     @PostMapping
-    WeatherDto getWeatherByName(@RequestBody PostRequest request) {
+    void getWeatherByName(@RequestBody PostRequest request) {
         logger.info("Getting weather for city={}", request.getCity());
-        return weatherService.getWeatherByCity(request.getCity());
     }
-
 }

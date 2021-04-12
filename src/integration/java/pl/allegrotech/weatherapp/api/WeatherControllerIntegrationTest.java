@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
-import pl.allegrotech.weatherapp.api.WebExceptionHandler.ExceptionResponse;
+import pl.allegrotech.weatherapp.domain.Location;
 import pl.allegrotech.weatherapp.domain.Weather;
 import pl.allegrotech.weatherapp.domain.WeatherRepository;
-import pl.allegrotech.weatherapp.domain.WeatherDto;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 import static pl.allegrotech.weatherapp.domain.SampleWeather.weatherForWarsaw;
@@ -31,40 +31,43 @@ class WeatherControllerIntegrationTest extends BaseIntegrationTest {
     @Test
     public void shouldReturnStatusOKWhenWeatherIsAvailableForGivenLocation() {
         // given
-        var sampleWeather = weatherForWarsaw();
+        Weather sampleWeather = weatherForWarsaw();
         weatherRepository.save(sampleWeather);
+        String url = prepareLocalUrl(sampleWeather.getLocation());
 
         // when
-        String url = prepareLocalUrl(sampleWeather.getLocation());
-        ResponseEntity<WeatherDto> response = restTemplate.getForEntity(url, WeatherDto.class);
+        ResponseEntity<WeatherApiResponse> response = restTemplate.getForEntity(url, WeatherApiResponse.class);
 
         // then
         assertEquals(OK, response.getStatusCode());
 
         // and
-        assertEquals(sampleWeather.toDto(), response.getBody());
+        assertEquals(sampleWeather.toApiResponse(), response.getBody());
     }
 
     @Test
     public void shouldReturnStatusNotFoundWhenWeatherIsNotAvailableForGivenLocation() {
         // given
-        var sampleWeather = weatherForWarsaw();
+        Weather sampleWeather = weatherForWarsaw();
+        String url = prepareLocalUrl(sampleWeather.getLocation());
 
         // when
-        String url = prepareLocalUrl(sampleWeather.getLocation());
-        ResponseEntity<ExceptionResponse> response = restTemplate.getForEntity(url, ExceptionResponse.class);
+        ResponseEntity<WebExceptionResponse> response = restTemplate.getForEntity(url, WebExceptionResponse.class);
 
         // then
         assertEquals(NOT_FOUND, response.getStatusCode());
 
         // and
-        var responseBody = response.getBody();
+        WebExceptionResponse responseBody = response.getBody();
         assertNotNull(responseBody);
         assertEquals(NOT_FOUND.value(), responseBody.getErrorCode());
-        assertEquals("Weather with location = Location{latitude=52.2297, longitude=21.0122} was not found", responseBody.getMessage());
+        assertEquals(
+                "Weather for location = Location{latitude=52.2297, longitude=21.0122} was not found",
+                responseBody.getMessage()
+        );
     }
 
-    private String prepareLocalUrl(Weather.Location location) {
+    private String prepareLocalUrl(Location location) {
         String getWeatherPath = String.format(
                 "/weather?latitude=%s&longitude=%s",
                 location.getLatitude(),
