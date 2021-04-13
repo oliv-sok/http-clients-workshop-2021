@@ -1,27 +1,30 @@
-###Zadanie 1
+##Zadanie 1
 
-Twoim zadaniem jest dodanie nowego endpointu, pozwalającego na zapisywanie danych pogodowych dla danej lokalizacji.
-Dane powinny być przechowywane w repozytorium in-memory oraz możliwe do pobrania za pomocą istniejącego endpointu typu GET.
+Twoim zadaniem jest dokończenie implementacji endpointu pozwalającego na zapisywanie danych pogodowych dla danej lokalizacji.
+Endpoint ten znajduje się w klasie __WeatherController__.
+Dane pogodowe powinny być przechowywane w repozytorium in-memory oraz możliwe do pobrania za pomocą istniejącego endpointu typu GET.
 
-Nowy endpoint powinien wyglądać następująco:
-
-* metoda HTTP: POST
-* ścieżka: /weather
-* body requestu:
+Nowy endpoint powinien działać następująco:
+* format requestu:
+  * metoda HTTP: POST
+  * ścieżka: ```/weather```
+  * body:
     ```
     {
-        "location": {
-            "latitude": ...
-            "longitude": ...
-        }
-        "temperature": ...
+        "latitude": 52.1
+        "longitude": 23.7
+        "city": "Warszawa",
+        "temperature": 21.5
     }
     ```
-* w odpowiedzi oprócz zapisanych danych pogodowych powinien znajdować się nagłówek Location wskazujący na ścieżkę dodanego zasobu, tzn. "/weather/{id}"
+* format response'u:
+  * status: 201 Created
+  * w body zwracamy dane zapisanego zasobu
 
-Dopisz test integracyjny w klasie WeatherControllerIntegrationTest sprawdzający ścieżkę pozytywną.
+###Kroki do wykonania
+* dopisz implementację endpointu w klasie ```WeatherController```, dodaj klasę reprezentującą body requestu, np. ```WeatherApiRequest```
+* dopisz test integracyjny w klasie ```WeatherControllerIntegrationTest``` sprawdzający ścieżkę pozytywną, użyj metody ```postForEntity``` z klasy ```TestRestTemplate```
 
-Informacje pomocnicze:
-* do zbudowania requestu możesz użyć adnotacji @PostMapping oraz @RequestBody
-* do dodania nagłówka w odpowiedzi możesz użyć klasy UriComponentsBuilder
-* w teście integracyjnym możesz użyć metody postForEntity(...) z klasy TestRestTemplate
+###Część dodatkowa
+* rozszerz zwracany response o nagłówek ```Location```, który będzie wskazywać na ścieżkę dodanego zasobu, tzn. ```/weather?latitude=...&longitude=...```
+* do zbudowania nagłówka ```Location``` możesz użyć parametru ```uriComponentsBuilder``` i metody ```ResponseEntity.created(...)```

@@ -9,7 +9,7 @@ import static pl.allegrotech.weatherapp.domain.SampleWeather.weatherForWarsaw;
 class WeatherServiceTest {
 
     WeatherRepository weatherRepository = new InMemoryWeatherRepository();
-    WeatherService weatherService = new WeatherService(weatherRepository);
+    WeatherService weatherService = new WeatherService(weatherRepository, null);
 
     @Test
     public void shouldReturnWeatherWhenItExists() {
@@ -23,4 +23,5 @@ class WeatherServiceTest {
         // then
         assertEquals(sampleWeather, foundWeather);
     }
+
 }
