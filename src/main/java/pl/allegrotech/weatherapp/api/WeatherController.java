@@ -13,7 +13,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.springframework.http.MediaType.*;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 class WeatherController {
@@ -36,10 +36,10 @@ class WeatherController {
         );
     }
 
-    @GetMapping(path = "/allweather", produces = APPLICATION_JSON_VALUE)
-    ResponseEntity<List<WeatherApiResponse>> getWeather() {
+    @GetMapping(path = "/weather/all", produces = APPLICATION_JSON_VALUE)
+    ResponseEntity<List<WeatherApiResponse>> getWeatherForAllLocations() {
         return ResponseEntity.ok(
-                weatherService.getAllWeather().stream().map(Weather::toApiResponse).collect(Collectors.toList())
+                weatherService.getWeatherForAllLocation().stream().map(Weather::toApiResponse).collect(Collectors.toList())
         );
     }
 
@@ -50,7 +50,10 @@ class WeatherController {
         URI createdResourceLocationUri = uriComponentsBuilder.path("/weather")
                 .queryParam("latitude", request.getLatitude())
                 .queryParam("longitude", request.getLongitude())
-                .build().toUri();
-        return ResponseEntity.created(createdResourceLocationUri).body(savedWeather.toApiResponse());
+                .build()
+                .toUri();
+        return ResponseEntity
+                .created(createdResourceLocationUri)
+                .body(savedWeather.toApiResponse());
     }
 }

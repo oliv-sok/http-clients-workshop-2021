@@ -11,5 +11,5 @@ public interface WeatherRepository {
 
     void deleteAll();
 
-    public Optional<List<Weather>> getAll();
+    List<Weather> getAll();
 }

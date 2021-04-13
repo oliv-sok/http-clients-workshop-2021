@@ -1,9 +1,7 @@
 package pl.allegrotech.weatherapp.domain;
 
 import pl.allegrotech.weatherapp.api.WeatherApiRequest;
-import pl.allegrotech.weatherapp.api.WeatherApiResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherService {
@@ -20,14 +18,10 @@ public class WeatherService {
     }
 
     public Weather saveWeather(WeatherApiRequest request) {
-        return weatherRepository.save(apiRequestToWeather(request));
+        return weatherRepository.save(request.toWeather());
     }
 
-    public List<Weather> getAllWeather() {
-        return weatherRepository.getAll().orElse(new ArrayList<>());
-    }
-
-    private Weather apiRequestToWeather(WeatherApiRequest request) {
-        return new Weather(new Location(request.getLatitude(), request.getLongitude()), request.getCity(), request.getTemperature());
+    public List<Weather> getWeatherForAllLocation() {
+        return weatherRepository.getAll();
     }
 }
