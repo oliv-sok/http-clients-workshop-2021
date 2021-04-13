@@ -6,7 +6,7 @@ public class SampleWeather {
     private static final Double TEMPERATURE = 21.0;
 
     public static Weather weatherForWarsaw() {
-        return new Weather(LOCATION, TEMPERATURE);
+        return new Weather(LOCATION, "Warsaw", TEMPERATURE);
     }
 
 }
