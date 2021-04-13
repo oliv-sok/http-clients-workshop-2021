@@ -57,7 +57,8 @@ class WeatherController {
         URI createdResourceLocationUri = uriComponentsBuilder.path("/weather")
                 .queryParam("latitude", request.getLatitude())
                 .queryParam("longitude", request.getLongitude())
-                .build().toUri();
+                .build()
+                .toUri();
         return ResponseEntity
                 .created(createdResourceLocationUri)
                 .body(savedWeather.toApiResponse());
@@ -68,7 +69,6 @@ class WeatherController {
             @RequestParam(name = "latitude") double latitude,
             @RequestParam(name = "longitude") double longitude
     ) {
-        // TODO Zadanie 2
         logger.info("Getting weather forecast for latitude = {} and longitude = {}", latitude, longitude);
         WeatherForecast weatherForecast = weatherService.getWeatherForecastByLocation(new Location(latitude, longitude));
         return ResponseEntity.ok(weatherForecast.toApiResponse());

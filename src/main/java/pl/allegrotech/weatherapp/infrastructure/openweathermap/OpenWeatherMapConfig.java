@@ -1,30 +1,25 @@
 package pl.allegrotech.weatherapp.infrastructure.openweathermap;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import pl.allegrotech.weatherapp.domain.WeatherForecastProvider;
 import pl.allegrotech.weatherapp.infrastructure.openweathermap.client.OpenWeatherMapClient;
+
+import java.time.Duration;
 
 @Configuration
 class OpenWeatherMapConfig {
 
     @Bean
-    public HttpComponentsClientHttpRequestFactory httpRequestFactory() {
+    public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
         // TODO Zadanie 3
-        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-        factory.setConnectTimeout(1000);
-        factory.setConnectionRequestTimeout(1000);
-        factory.setReadTimeout(1000);
-        return factory;
-    }
-
-    @Bean
-    public RestTemplate restTemplate(HttpComponentsClientHttpRequestFactory httpRequestFactory) {
-        // TODO Zadanie 3
-        return new RestTemplate(httpRequestFactory);
+        return restTemplateBuilder
+                .setConnectTimeout(Duration.ofMillis(100))
+                .setReadTimeout(Duration.ofMillis(1000))
+                .build();
     }
 
     @Bean
