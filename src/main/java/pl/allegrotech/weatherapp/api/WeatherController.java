@@ -3,14 +3,14 @@ package pl.allegrotech.weatherapp.api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import pl.allegrotech.weatherapp.domain.Location;
 import pl.allegrotech.weatherapp.domain.Weather;
 import pl.allegrotech.weatherapp.domain.WeatherForecast;
 import pl.allegrotech.weatherapp.domain.WeatherService;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,22 +46,9 @@ class WeatherController {
         return ResponseEntity.ok(weatherForAllLocations);
     }
 
-    @PostMapping(path = "/weather", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-    ResponseEntity<WeatherApiResponse> addWeatherForLocation(
-            @RequestBody WeatherApiRequest request,
-            UriComponentsBuilder uriComponentsBuilder
-    ) {
-        // TODO Zadanie 1
-        logger.info("Adding weather = {}", request);
-        Weather savedWeather = weatherService.saveWeather(request.toWeather());
-        URI createdResourceLocationUri = uriComponentsBuilder.path("/weather")
-                .queryParam("latitude", request.getLatitude())
-                .queryParam("longitude", request.getLongitude())
-                .build()
-                .toUri();
-        return ResponseEntity
-                .created(createdResourceLocationUri)
-                .body(savedWeather.toApiResponse());
+    // TODO Zadanie 1
+    void addWeatherForLocation(WeatherApiRequest request) {
+
     }
 
     @GetMapping(path = "/weather/forecast", produces = APPLICATION_JSON_VALUE)

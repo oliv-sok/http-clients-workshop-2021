@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherApiRequest {
-
+    
     private final double latitude;
     private final double longitude;
     private final String city;

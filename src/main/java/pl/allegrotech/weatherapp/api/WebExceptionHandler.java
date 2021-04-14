@@ -5,12 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.ResourceAccessException;
 import pl.allegrotech.weatherapp.domain.WeatherNotFoundException;
 
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @ControllerAdvice
 class WebExceptionHandler {
@@ -23,28 +20,6 @@ class WebExceptionHandler {
         return new ResponseEntity<>(response, NOT_FOUND);
     }
 
-    @ExceptionHandler(HttpClientErrorException.class)
-    ResponseEntity<WebExceptionResponse> handleHttpClientErrorException(HttpClientErrorException exception) {
-        // TODO Zadanie 3
-        logger.warn("Client error occurred: ", exception);
-        WebExceptionResponse response = new WebExceptionResponse(BAD_REQUEST, exception.getMessage());
-        return new ResponseEntity<>(response, BAD_REQUEST);
-    }
-
-    @ExceptionHandler(HttpServerErrorException.class)
-    ResponseEntity<WebExceptionResponse> handleHttpServerErrorException(HttpServerErrorException exception) {
-        // TODO Zadanie 3
-        logger.error("Server error occurred: ", exception);
-        WebExceptionResponse response = new WebExceptionResponse(INTERNAL_SERVER_ERROR, exception.getMessage());
-        return new ResponseEntity<>(response, INTERNAL_SERVER_ERROR);
-    }
-
-    @ExceptionHandler(ResourceAccessException.class)
-    ResponseEntity<WebExceptionResponse> handleResourceAccessException(ResourceAccessException exception) {
-        // TODO Zadanie 3
-        logger.warn("Timeout error occurred: ", exception);
-        WebExceptionResponse response = new WebExceptionResponse(REQUEST_TIMEOUT, exception.getMessage());
-        return new ResponseEntity<>(response, REQUEST_TIMEOUT);
-    }
+    // TODO Zadanie 3
 
 }

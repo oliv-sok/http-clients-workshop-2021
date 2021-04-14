@@ -1,10 +1,10 @@
 ##Zadanie 3
 
 Zadanie składa się z dwóch części:
-* chcemy sprawić, żeby endpoint ```/weather/forecast``` zwracał poprawne kody błędów w zależności od tego, jaki błąd wystąpił w komunikacji z serwisem OpenWeatherMap:
-   * dla błędów po stronie serwera (5xx) -> HttpStatus.INTERNAL_SERVER_ERROR
-   * dla błędów po stronie klienta (4xx) -> HttpStatus.BAD_REQUEST
-   * dla błędów związanych z timeoutami -> HttpStatus.REQUEST_TIMEOUT
+* chcemy sprawić, żeby endpoint ```/weather/forecast``` zwracał kod błędu 422 (UNPROCESSABLE_ENTITY) w sytuacji, gdy wystąpi jakiś błąd w komunikacji z serwisem OpenWeatherMap, w szczególności chodzi o:
+    * błędy po stronie serwera (5xx)
+    * błędy po stronie klienta (4xx)
+    * błędy związane z timeoutami
 * chcemy skonfigurować timeouty dla klienta HTTP, odpytującego serwis OpenWeatherMap
 
 ###Kroki do wykonania
