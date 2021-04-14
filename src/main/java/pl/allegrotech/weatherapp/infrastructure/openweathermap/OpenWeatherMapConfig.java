@@ -15,8 +15,10 @@ class OpenWeatherMapConfig {
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
-        // TODO Zadanie 3
-        return restTemplateBuilder.build();
+        return restTemplateBuilder
+                .setConnectTimeout(Duration.ofMillis(100))
+                .setReadTimeout(Duration.ofMillis(1000))
+                .build();
     }
 
     @Bean
