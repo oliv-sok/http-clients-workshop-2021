@@ -1,4 +1,4 @@
-package pl.allegrotech.weatherapp.api.examples;
+package pl.allegrotech.weatherapp.examples;
 
 import java.util.Objects;
 
