@@ -20,4 +20,6 @@ class WebExceptionHandler {
         return new ResponseEntity<>(response, NOT_FOUND);
     }
 
+    // TODO Zadanie 3
+
 }
