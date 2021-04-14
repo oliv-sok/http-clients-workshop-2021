@@ -4,3 +4,15 @@ client:
   openWeatherMap:
     baseUrl: https://api.openweathermap.org/data/2.5/onecall
     apiKey: 19480ec4ecd8af4f6320943d5de0fdfd
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          client: DEBUG
+
+spring:
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false
