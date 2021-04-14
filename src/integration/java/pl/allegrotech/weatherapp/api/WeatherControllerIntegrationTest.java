@@ -85,7 +85,10 @@ class WeatherControllerIntegrationTest extends BaseIntegrationTest {
 
         // and
         assertEquals(sampleWeather.toApiResponse(), response.getBody());
-        // TODO Zadanie 1
+        assertEquals(
+                String.format("http://localhost:%s/weather?latitude=52.5&longitude=21.5", port),
+                response.getHeaders().getLocation().toString()
+        );
 
         // and
         List<Weather> weather = weatherRepository.getAll();
