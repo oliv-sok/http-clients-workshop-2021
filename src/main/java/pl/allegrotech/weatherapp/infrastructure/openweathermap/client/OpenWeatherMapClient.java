@@ -16,8 +16,18 @@ public class OpenWeatherMapClient {
     }
 
     public OpenWeatherMapResponse getWeatherForecast(Location location) {
-        // TODO Zadanie 2
-        return null;
+        String url = prepareUrl(location.getLatitude(), location.getLongitude());
+        return restTemplate.getForEntity(url, OpenWeatherMapResponse.class).getBody();
+    }
+
+    private String prepareUrl(double latitude, double longitude) {
+        return String.format(
+                "%s?lat=%s&lon=%s&appid=%s&exclude=current,hourly,minutely,alerts&units=metric",
+                baseUrl,
+                latitude,
+                longitude,
+                apiKey
+        );
     }
 
 }
