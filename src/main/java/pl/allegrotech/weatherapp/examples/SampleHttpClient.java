@@ -19,7 +19,7 @@ class SampleHttpClient {
     }
 
     @GetMapping(path = "/sample-user", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<SampleHttpClientResponse> execute() {
+    ResponseEntity<SampleHttpClientResponse> getSampleUser() {
         ResponseEntity<SampleHttpClientResponse> response = callExternalService();
         printResponse(response);
         return ResponseEntity.ok(response.getBody());
