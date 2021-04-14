@@ -6,6 +6,10 @@ import pl.allegrotech.weatherapp.domain.WeatherForecastProvider;
 import pl.allegrotech.weatherapp.infrastructure.openweathermap.client.OpenWeatherMapClient;
 import pl.allegrotech.weatherapp.infrastructure.openweathermap.client.OpenWeatherMapResponse;
 
+import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
+
 class OpenWeatherMapForecastProvider implements WeatherForecastProvider {
 
     private final OpenWeatherMapClient openWeatherMapClient;
@@ -16,9 +20,22 @@ class OpenWeatherMapForecastProvider implements WeatherForecastProvider {
 
     @Override
     public WeatherForecast getWeatherForecastByLocation(Location location) {
-        // TODO Zadanie 2
         OpenWeatherMapResponse openWeatherMapResponse = openWeatherMapClient.getWeatherForecast(location);
-        return null;
+        return toWeatherForecast(location, openWeatherMapResponse.getDailyForecastDto());
+    }
+
+    private WeatherForecast toWeatherForecast(Location location, List<OpenWeatherMapResponse.DailyForecastDto> dailyForecastDto) {
+        List<WeatherForecast.DailyTemperature> dailyTemperatures = dailyForecastDto.stream()
+                .map(this::toDailyTemperature)
+                .collect(Collectors.toList());
+        return new WeatherForecast(location, dailyTemperatures);
+    }
+
+    private WeatherForecast.DailyTemperature toDailyTemperature(OpenWeatherMapResponse.DailyForecastDto dailyForecastDto) {
+        return new WeatherForecast.DailyTemperature(
+                Instant.ofEpochSecond(dailyForecastDto.getDateAsUnixTimestamp()),
+                dailyForecastDto.getTemperatureForecastDto().getValue()
+        );
     }
 
 }

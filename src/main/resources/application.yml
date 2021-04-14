@@ -3,4 +3,4 @@ server.port: 8090
 client:
   openWeatherMap:
     baseUrl: https://api.openweathermap.org/data/2.5/onecall
-    apiKey: f8808a0fe2a10e44874330a3e69e1b34
+    apiKey: 19480ec4ecd8af4f6320943d5de0fdfd
