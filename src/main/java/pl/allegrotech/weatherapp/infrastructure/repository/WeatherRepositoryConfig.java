@@ -11,4 +11,5 @@ class WeatherRepositoryConfig {
     WeatherRepository weatherRepository() {
         return new InMemoryWeatherRepository();
     }
+
 }

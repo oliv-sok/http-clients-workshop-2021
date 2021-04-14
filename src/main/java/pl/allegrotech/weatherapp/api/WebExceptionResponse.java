@@ -1,16 +1,18 @@
 package pl.allegrotech.weatherapp.api;
 
+import org.springframework.http.HttpStatus;
+
 class WebExceptionResponse {
 
-    private final int errorCode;
+    private final String errorCode;
     private final String message;
 
-    WebExceptionResponse(int errorCode, String message) {
-        this.errorCode = errorCode;
+    WebExceptionResponse(HttpStatus httpStatus, String message) {
+        this.errorCode = httpStatus != null ? httpStatus.name() : null;
         this.message = message;
     }
 
-    public int getErrorCode() {
+    public String getErrorCode() {
         return errorCode;
     }
 

@@ -8,6 +8,7 @@ import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherApiRequest {
+
     private final double latitude;
     private final double longitude;
     private final String city;
@@ -18,10 +19,6 @@ public class WeatherApiRequest {
         this.longitude = longitude;
         this.city = city;
         this.temperature = temperature;
-    }
-
-    public Weather toWeather() {
-        return new Weather(new Location(this.getLatitude(), this.getLongitude()), this.getCity(), this.getTemperature());
     }
 
     public double getLatitude() {
@@ -40,15 +37,23 @@ public class WeatherApiRequest {
         return temperature;
     }
 
+    public Weather toWeather() {
+        return new Weather(
+                new Location(
+                        this.getLatitude(),
+                        this.getLongitude()
+                ),
+                this.getCity(),
+                this.getTemperature()
+        );
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WeatherApiRequest that = (WeatherApiRequest) o;
-        return Double.compare(that.latitude, latitude) == 0 &&
-                Double.compare(that.longitude, longitude) == 0 &&
-                Double.compare(that.temperature, temperature) == 0 &&
-                Objects.equals(city, that.city);
+        return Double.compare(that.latitude, latitude) == 0 && Double.compare(that.longitude, longitude) == 0 && Double.compare(that.temperature, temperature) == 0 && Objects.equals(city, that.city);
     }
 
     @Override
@@ -65,4 +70,5 @@ public class WeatherApiRequest {
                 ", temperature=" + temperature +
                 '}';
     }
+
 }

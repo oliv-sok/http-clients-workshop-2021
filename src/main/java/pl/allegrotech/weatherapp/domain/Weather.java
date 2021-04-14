@@ -1,5 +1,6 @@
 package pl.allegrotech.weatherapp.domain;
 
+import pl.allegrotech.weatherapp.api.WeatherApiRequest;
 import pl.allegrotech.weatherapp.api.WeatherApiResponse;
 
 import java.util.Objects;
@@ -26,6 +27,15 @@ public final class Weather {
 
     public double getTemperature() {
         return temperature;
+    }
+
+    public WeatherApiRequest toApiRequest() {
+        Location location = this.getLocation();
+        return new WeatherApiRequest(
+                location.getLatitude(),
+                location.getLongitude(),
+                this.getCity(),
+                this.getTemperature());
     }
 
     public WeatherApiResponse toApiResponse() {

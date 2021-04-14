@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 class WeatherConfig {
 
     @Bean
-    WeatherService weatherService(WeatherRepository weatherRepository) {
-        return new WeatherService(weatherRepository);
+    WeatherService weatherService(WeatherRepository weatherRepository, WeatherForecastProvider weatherForecastProvider) {
+        return new WeatherService(weatherRepository, weatherForecastProvider);
     }
 
 }

@@ -12,4 +12,5 @@ public interface WeatherRepository {
     void deleteAll();
 
     List<Weather> getAll();
+
 }
