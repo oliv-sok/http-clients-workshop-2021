@@ -1,0 +1,57 @@
+pl/allegrotech/weatherapp/examples/SampleResponse.java
+ pl.allegrotech.weatherapp.examples.SampleResponse
+pl/allegrotech/weatherapp/infrastructure/repository/WeatherRepositoryConfig.java
+ pl.allegrotech.weatherapp.infrastructure.repository.WeatherRepositoryConfig
+pl/allegrotech/weatherapp/domain/Location.java
+ pl.allegrotech.weatherapp.domain.Location
+pl/allegrotech/weatherapp/domain/WeatherService.java
+ pl.allegrotech.weatherapp.domain.WeatherService
+pl/allegrotech/weatherapp/domain/WeatherForecast.java
+ pl.allegrotech.weatherapp.domain.WeatherForecast
+ pl.allegrotech.weatherapp.domain.WeatherForecast$DailyTemperature
+pl/allegrotech/weatherapp/api/WeatherApiResponse.java
+ pl.allegrotech.weatherapp.api.WeatherApiResponse
+pl/allegrotech/weatherapp/domain/WeatherForecastProvider.java
+ pl.allegrotech.weatherapp.domain.WeatherForecastProvider
+pl/allegrotech/weatherapp/examples/SampleHttpClient.java
+ pl.allegrotech.weatherapp.examples.SampleHttpClient
+pl/allegrotech/weatherapp/domain/Weather.java
+ pl.allegrotech.weatherapp.domain.Weather
+pl/allegrotech/weatherapp/api/WeatherForecastApiResponse.java
+ pl.allegrotech.weatherapp.api.WeatherForecastApiResponse
+ pl.allegrotech.weatherapp.api.WeatherForecastApiResponse$DailyTemperatureApiResponse
+pl/allegrotech/weatherapp/domain/WeatherRepository.java
+ pl.allegrotech.weatherapp.domain.WeatherRepository
+pl/allegrotech/weatherapp/domain/WeatherNotFoundException.java
+ pl.allegrotech.weatherapp.domain.WeatherNotFoundException
+pl/allegrotech/weatherapp/WeatherApplication.java
+ pl.allegrotech.weatherapp.WeatherApplication
+pl/allegrotech/weatherapp/api/WeatherController.java
+ pl.allegrotech.weatherapp.api.WeatherController
+pl/allegrotech/weatherapp/domain/WeatherConfig.java
+ pl.allegrotech.weatherapp.domain.WeatherConfig
+pl/allegrotech/weatherapp/examples/SampleRequest.java
+ pl.allegrotech.weatherapp.examples.SampleRequest
+pl/allegrotech/weatherapp/infrastructure/repository/InMemoryWeatherRepository.java
+ pl.allegrotech.weatherapp.infrastructure.repository.InMemoryWeatherRepository
+pl/allegrotech/weatherapp/infrastructure/openweathermap/client/OpenWeatherMapResponse.java
+ pl.allegrotech.weatherapp.infrastructure.openweathermap.client.OpenWeatherMapResponse
+ pl.allegrotech.weatherapp.infrastructure.openweathermap.client.OpenWeatherMapResponse$DaillyForecastDTO
+ pl.allegrotech.weatherapp.infrastructure.openweathermap.client.OpenWeatherMapResponse$TemperatureForecastDTO
+pl/allegrotech/weatherapp/examples/SampleHttpClientResponse.java
+ pl.allegrotech.weatherapp.examples.SampleHttpClientResponse
+ pl.allegrotech.weatherapp.examples.SampleHttpClientResponse$Book
+pl/allegrotech/weatherapp/api/WeatherApiRequest.java
+ pl.allegrotech.weatherapp.api.WeatherApiRequest
+pl/allegrotech/weatherapp/api/WebExceptionHandler.java
+ pl.allegrotech.weatherapp.api.WebExceptionHandler
+pl/allegrotech/weatherapp/examples/SampleControllers.java
+ pl.allegrotech.weatherapp.examples.SampleControllers
+pl/allegrotech/weatherapp/api/WebExceptionResponse.java
+ pl.allegrotech.weatherapp.api.WebExceptionResponse
+pl/allegrotech/weatherapp/infrastructure/openweathermap/client/OpenWeatherMapClient.java
+ pl.allegrotech.weatherapp.infrastructure.openweathermap.client.OpenWeatherMapClient
+pl/allegrotech/weatherapp/infrastructure/openweathermap/OpenWeatherMapForecastProvider.java
+ pl.allegrotech.weatherapp.infrastructure.openweathermap.OpenWeatherMapForecastProvider
+pl/allegrotech/weatherapp/infrastructure/openweathermap/OpenWeatherMapConfig.java
+ pl.allegrotech.weatherapp.infrastructure.openweathermap.OpenWeatherMapConfig
